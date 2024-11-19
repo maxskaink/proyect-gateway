@@ -1,0 +1,26 @@
+# Archivo: air.toml
+
+# Configuración básica
+[build]
+  bin = "tmp/main" # Ruta del binario generado
+  cmd = "go build -o tmp/main cmd/gateway/main.go" # Comando de compilación
+  full_bin = "tmp/main" # Ruta completa del binario generado
+  include_ext = ["go"] # Extensiones de archivos a observar
+  exclude_dir = ["tmp", "vendor"] # Directorios a excluir
+  exclude_file = ["air.toml"] # Archivos a excluir
+  follow_symlink = true # Seguir enlaces simbólicos
+  log = "tmp/build-errors.log" # Archivo de log de errores de compilación
+
+# Configuración del servidor
+[server]
+  cmd = "tmp/main" # Comando para ejecutar el servidor
+  watch_dir = ["./"] # Directorios a observar
+  watch_ext = ["go", "tpl", "tmpl", "html"] # Extensiones de archivos a observar
+  delay = 1000 # Retraso en milisegundos antes de reiniciar el servidor
+  grace = 2000 # Tiempo de gracia en milisegundos antes de detener el servidor
+  kill_signal = "SIGTERM" # Señal para detener el servidor
+  restart_on_error = true # Reiniciar el servidor en caso de error
+  watch = true # Observar cambios en archivos
+  watch_delay = 500 # Retraso en milisegundos antes de observar cambios
+  watch_exclude_dir = ["tmp", "vendor"] # Directorios a excluir de la observación
+  watch_exclude_file = ["air.toml"] # Archivos a excluir de la observación
